@@ -1,21 +1,176 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Ela & Emir — Playlist</title>
-  <style>
-    body {font-family: system-ui, sans-serif; background:#fafafa; color:#222; text-align:center; padding:40px;}
-    h1 {margin-bottom:24px;}
-    a {display:inline-block; margin:12px; padding:14px 22px; background:#222; color:white; border-radius:12px; text-decoration:none;}
-    a:hover {background:#444;}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ela & Emir — Vintage</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#2b1e1a;          /* koyu kahve */
+  --bg-2:#3a2a26;        /* ikinci koyu */
+  --accent:#d97c6a;      /* somon */
+  --accent-2:#c96f5f;
+  --light:#f3d1c8;       /* açık pembe */
+  --ink:#f8ebe7;         /* yazı açık */
+  --frame:#eac3b7;       /* çerçeve */
+  --shadow:0 12px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Montserrat,system-ui,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.container{max-width:1150px;margin:auto;padding:0 20px}
+
+/* üst bant */
+.topbar{background:var(--bg-2);border-bottom:4px solid var(--frame)}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;height:52px}
+.brand{font-family:Oswald,system-ui;letter-spacing:.08em}
+.brand b{font-weight:700}
+.social a{display:inline-grid;place-items:center;width:28px;height:28px;border:2px solid var(--frame);
+  border-radius:50%; margin-left:8px; font-size:12px}
+
+/* nav */
+.nav{background:linear-gradient(#d78a77,#d97c6a); color:#331e18; box-shadow:var(--shadow); position:sticky; top:0; z-index:5}
+.nav ul{display:flex; gap:24px; list-style:none; padding:12px 0; margin:0; justify-content:center;font-weight:600}
+.nav a{padding:8px 10px; border-bottom:3px solid transparent}
+.nav a:hover{border-color:#331e18}
+
+/* hero */
+.hero{
+  position:relative; isolation:isolate;
+  background:#1e1513;
+  min-height:56vh; display:grid; place-items:center; text-align:center;
+  border-bottom:6px solid var(--frame);
+  box-shadow:var(--shadow)
+}
+.hero::before{
+  /* ARKAPLAN FOTO: burayı kendi görselinle değiştir */
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(43,30,26,.55),rgba(43,30,26,.75)),
+    url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
+  z-index:-1; filter:sepia(.45) contrast(1.02) saturate(.9);
+}
+/* hafif gren efekti */
+.hero::after{
+  content:""; position:absolute; inset:0; mix-blend-mode:overlay; opacity:.25; z-index:-1;
+  background-image:
+   radial-gradient(rgba(0,0,0,.2) 1px, transparent 1px),
+   radial-gradient(rgba(0,0,0,.15) 1px, transparent 1px);
+  background-size:3px 3px, 4px 4px;
+  background-position:0 0, 10px 10px;
+}
+.hero h1{font-family:Oswald; font-size:clamp(40px,7vw,92px); margin:0 0 10px; text-transform:uppercase; letter-spacing:.06em}
+.hero p{opacity:.9; margin:0 0 24px}
+.btn{
+  display:inline-block; padding:14px 22px; background:var(--accent); color:#331e18;
+  border-radius:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  border:3px solid #f4c6bc; box-shadow:0 6px 0 var(--accent-2);
+}
+.btn:active{transform:translateY(2px); box-shadow:0 4px 0 var(--accent-2)}
+
+/* features / kartlar */
+.section{padding:56px 0}
+.grid{display:grid; gap:26px; grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--bg-2); border:4px solid var(--frame); border-radius:8px; box-shadow:var(--shadow); overflow:hidden
+}
+.thumb{height:160px; background:#000 center/cover no-repeat; filter:sepia(.35) contrast(1.05)}
+.card .body{padding:16px 14px 18px; text-align:center}
+.card h3{margin:0 0 8px; font-family:Oswald; letter-spacing:.04em; font-size:22px}
+.card .line{width:72px; height:3px; background:var(--frame); margin:10px auto 0; opacity:.7}
+.card a.block{display:block}
+.card:hover{transform:translateY(-2px)}
+
+/* footer */
+.footer{padding:26px 0; text-align:center; border-top:4px solid var(--frame); color:#e8d6d1}
+
+/* responsive */
+@media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){
+  .nav ul{gap:14px; font-size:14px}
+  .grid{grid-template-columns:1fr}
+  .topbar .container{justify-content:center; gap:10px}
+}
+</style>
 </head>
 <body>
-  <h1>Ela & Emir — Playlist 🎶</h1>
-  <p>Açmak istediğin platformu seç:</p>
-  <a href="https://open.spotify.com/playlist/SPOTIFY_ID" target="_blank">Spotify</a>
-  <a href="https://music.youtube.com/playlist?list=PLmLPCkWMuHK6TINd2VcehAkWIpEQ4ey-f&si=NkJyIWOUjWa-AuD0" target="_blank">YouTube</a>
-  <p style="margin-top:32px; font-size:14px; color:#555;">Bu sayfa düzenlenebilir, bağlantılar değişse bile adres hep aynı kalır.</p>
+
+<!-- ÜST BANT -->
+<header class="topbar">
+  <div class="container">
+    <div class="brand"><b>MODERN</b>VINTAGE</div>
+    <div class="social">
+      <!-- ikon yerine harf koyduk; istersen SVG ekleyebilirsin -->
+      <a href="#" title="Instagram">IG</a>
+      <a href="#" title="YouTube">YT</a>
+      <a href="#" title="Spotify">SP</a>
+      <a href="#" title="Pinterest">P</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <ul class="container">
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#playlist">Playlist</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contacts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1>HERO BAŞLIK</h1>
+    <p>ALT BAŞLIK / kısa açıklama metni buraya.</p>
+    <a class="btn" href="https://music.youtube.com/playlist?list=PLmLPCkWMuHK6TINd2VcehAkWIpEQ4ey-f" target="_blank">Play it now</a>
+  </div>
+</section>
+
+<!-- KARTLAR -->
+<section class="section container" id="playlist">
+  <div class="grid">
+    <!-- Kart 1 -->
+    <a class="card block" href="https://open.spotify.com/playlist/SPOTIFY_ID" target="_blank">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1513188736739-79a9a1667be5?q=80&w=1200&auto=format&fit=crop');"></div>
+      <div class="body">
+        <h3>Spotify Playlist</h3>
+        <div class="line"></div>
+      </div>
+    </a>
+    <!-- Kart 2 -->
+    <a class="card block" href="https://music.youtube.com/playlist?list=PLmLPCkWMuHK6TINd2VcehAkWIpEQ4ey-f" target="_blank">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop');"></div>
+      <div class="body">
+        <h3>YouTube Music</h3>
+        <div class="line"></div>
+      </div>
+    </a>
+    <!-- Kart 3 -->
+    <a class="card block" href="#gallery">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1495562569060-2eec283d3391?q=80&w=1200&auto=format&fit=crop');"></div>
+      <div class="body">
+        <h3>Cool Shortcodes</h3>
+        <div class="line"></div>
+      </div>
+    </a>
+    <!-- Kart 4 -->
+    <a class="card block" href="#contact">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1452723312111-3a7d0db0e024?q=80&w=1200&auto=format&fit=crop');"></div>
+      <div class="body">
+        <h3>Purchase Theme</h3>
+        <div class="line"></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">© Ela & Emir — Vintage Made Modern</div>
+</footer>
+
 </body>
 </html>
