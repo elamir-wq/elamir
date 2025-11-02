@@ -27,7 +27,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 .section{padding:28px 0}
 .grid{display:grid;gap:20px;grid-template-columns:repeat(4,1fr)}
 
-/* Flip kartlar */
+/* Flip sahne */
 .card{
   background:transparent;border:none;padding:0;margin:0;cursor:pointer;outline:none;
   perspective:1000px; -webkit-perspective:1000px;
@@ -46,14 +46,23 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 .card:focus .flip,
 .card:active .flip{ transform:rotateY(180deg) }
 
+/* Katmanlar + cross-fade */
 .face{
   position:absolute;inset:0;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  transform:translateZ(0);
-  background:#000 center/cover no-repeat;filter:sepia(.35) contrast(1.05)
+  background:#000 center/cover no-repeat;filter:sepia(.35) contrast(1.05);
+  transition:opacity .35s ease;
 }
-.face.front{ transform:rotateY(0) translateZ(0) }
-.face.back { transform:rotateY(180deg) translateZ(0) }
+.face.front{ opacity:1; transform:rotateY(0) translateZ(0) }
+.face.back  { opacity:0; transform:rotateY(180deg) translateZ(0) }
+
+/* Hover/focus’ta arka görünür, ön kaybolur */
+.card:hover .face.back,
+.card:focus .face.back,
+.card:active .face.back{ opacity:1 }
+.card:hover .face.front,
+.card:focus .face.front,
+.card:active .face.front{ opacity:0 }
 
 .caption{
   text-align:center;padding:10px 0 14px;background:var(--bg-2);
@@ -89,8 +98,8 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
   <h2 style="font-family:Oswald;margin:0 0 18px;letter-spacing:.05em">Fotoğraf Galerisi</h2>
   <div class="grid">
 
-    <!-- 1 (YOL DÜZELTİLDİ) -->
-    <button class="card" type="button" aria-label="Kare 01" tabindex="0">
+    <!-- 1 -->
+    <button class="card" type="button" aria-label="Kare 01">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/001a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/001b.jpg');"></div>
@@ -98,8 +107,8 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
       <div class="caption"><h4>Benim Adım Orman</h4><div class="line"></div></div>
     </button>
 
-    <!-- 2 (YOL DÜZELTİLDİ) -->
-    <button class="card" type="button" aria-label="Kare 02" tabindex="0">
+    <!-- 2 -->
+    <button class="card" type="button" aria-label="Kare 02">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/002a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/002b.jpg');"></div>
@@ -107,8 +116,8 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
       <div class="caption"><h4>Can Kırıkları</h4><div class="line"></div></div>
     </button>
 
-    <!-- 3 (YOL DÜZELTİLDİ) -->
-    <button class="card" type="button" aria-label="Kare 03" tabindex="0">
+    <!-- 3 -->
+    <button class="card" type="button" aria-label="Kare 03">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/003a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/003b.jpg');"></div>
@@ -116,9 +125,8 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
       <div class="caption"><h4>Parmak İzi</h4><div class="line"></div></div>
     </button>
 
-    <!-- 4–20 aynen -->
     <!-- 4 -->
-    <button class="card" type="button" aria-label="Kare 04" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 04">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/004a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/004b.jpg');"></div>
@@ -127,7 +135,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 5 -->
-    <button class="card" type="button" aria-label="Kare 05" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 05">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/005a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/005b.jpg');"></div>
@@ -136,7 +144,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 6 -->
-    <button class="card" type="button" aria-label="Kare 06" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 06">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/006a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/006b.jpg');"></div>
@@ -145,7 +153,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 7 -->
-    <button class="card" type="button" aria-label="Kare 07" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 07">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/007a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/007b.jpg');"></div>
@@ -154,7 +162,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 8 -->
-    <button class="card" type="button" aria-label="Kare 08" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 08">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/008a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/008b.jpg');"></div>
@@ -163,7 +171,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 9 -->
-    <button class="card" type="button" aria-label="Kare 09" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 09">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/009a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/009b.jpg');"></div>
@@ -172,7 +180,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 10 -->
-    <button class="card" type="button" aria-label="Kare 10" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 10">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/010a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/010b.jpg');"></div>
@@ -181,7 +189,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 11 -->
-    <button class="card" type="button" aria-label="Kare 11" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 11">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/011a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/011b.jpg');"></div>
@@ -190,7 +198,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 12 -->
-    <button class="card" type="button" aria-label="Kare 12" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 12">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/012a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/012b.jpg');"></div>
@@ -199,7 +207,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 13 -->
-    <button class="card" type="button" aria-label="Kare 13" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 13">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/013a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/013b.jpg');"></div>
@@ -208,7 +216,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 14 -->
-    <button class="card" type="button" aria-label="Kare 14" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 14">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/014a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/014b.jpg');"></div>
@@ -217,7 +225,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 15 -->
-    <button class="card" type="button" aria-label="Kare 15" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 15">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/015a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/015b.jpg');"></div>
@@ -226,7 +234,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 16 -->
-    <button class="card" type="button" aria-label="Kare 16" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 16">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/016a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/016b.jpg');"></div>
@@ -235,7 +243,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 17 -->
-    <button class="card" type="button" aria-label="Kare 17" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 17">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/017a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/017b.jpg');"></div>
@@ -244,7 +252,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 18 -->
-    <button class="card" type="button" aria-label="Kare 18" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 18">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/018a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/018b.jpg');"></div>
@@ -253,7 +261,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 19 -->
-    <button class="card" type="button" aria-label="Kare 19" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 19">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/019a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/019b.jpg');"></div>
@@ -262,7 +270,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
     </button>
 
     <!-- 20 -->
-    <button class="card" type="button" aria-label="Kare 20" tabindex="0">
+    <button class="card" type="button" aria-label="Kare 20">
       <div class="flip">
         <div class="face front" style="background-image:url('galeri/020a.jpg');"></div>
         <div class="face back"  style="background-image:url('galeri/020b.jpg');"></div>
