@@ -21,13 +21,43 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 
 .section{padding:28px 0}
 .grid{display:grid;gap:20px;grid-template-columns:repeat(4,1fr)}
-.card{background:var(--bg-2);border:4px solid var(--frame);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
-.thumb{aspect-ratio:4/3;background:#000 center/cover no-repeat;filter:sepia(.35) contrast(1.05)}
-.card .body{padding:10px 12px 14px;text-align:center}
-.card h4{margin:0;font-family:Oswald;letter-spacing:.04em;font-size:18px}
-.card .line{width:60px;height:3px;background:var(--frame);margin:8px auto 0;opacity:.7}
 
-/* Not: kartlar tıklanmaz -> <div> kullanıldı, cursor varsayılan */
+/* Flip kartlar */
+.card{
+  background:transparent;border:none;padding:0;margin:0;cursor:pointer;outline:none;
+  perspective:1000px; /* 3D */
+  border-radius:8px;
+}
+.card:focus-visible{box-shadow:0 0 0 3px #f4c6bcaa;border-radius:10px}
+.flip{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:8px;
+  transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.65,.2,1);
+  box-shadow:var(--shadow);border:4px solid var(--frame);overflow:hidden;
+}
+.card:hover .flip,
+.card:focus .flip,
+.card:active .flip{ transform:rotateY(180deg) }
+
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  background:#000 center/cover no-repeat;filter:sepia(.35) contrast(1.05)
+}
+.back{ transform:rotateY(180deg) }
+
+.caption{
+  text-align:center;padding:10px 0 14px;background:var(--bg-2);
+  border:4px solid var(--frame);border-top:none;border-radius:0 0 8px 8px
+}
+.caption h4{margin:0;font-family:Oswald;letter-spacing:.04em;font-size:18px;color:var(--ink)}
+.caption .line{width:60px;height:3px;background:var(--frame);margin:8px auto 0;opacity:.7}
+
+/* Erişilebilirlik: hareketi azalt seçeneği */
+@media (prefers-reduced-motion:reduce){
+  .flip{transition:none}
+  .card:hover .flip,.card:focus .flip,.card:active .flip{transform:none}
+}
+
+/* Alt kısım */
 .footer{padding:22px 0;text-align:center;border-top:4px solid var(--frame);color:#e8d6d1}
 
 @media (max-width:980px){ .grid{grid-template-columns:repeat(3,1fr)} }
@@ -48,106 +78,185 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
   <h2 style="font-family:Oswald;margin:0 0 18px;letter-spacing:.05em">Fotoğraf Galerisi</h2>
   <div class="grid">
 
-    <!-- 1–20: Arka plan görsellerini dosya adlarınla değiştir -->
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/001.jpg');"></div>
-      <div class="body"><h4>Kare 01</h4><div class="line"></div></div>
-    </div>
+    <!-- 1 -->
+    <button class="card" type="button" aria-label="Kare 01" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/001a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/001b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 01</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/002.jpg');"></div>
-      <div class="body"><h4>Kare 02</h4><div class="line"></div></div>
-    </div>
+    <!-- 2 -->
+    <button class="card" type="button" aria-label="Kare 02" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/002a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/002b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 02</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/003.jpg');"></div>
-      <div class="body"><h4>Kare 03</h4><div class="line"></div></div>
-    </div>
+    <!-- 3 -->
+    <button class="card" type="button" aria-label="Kare 03" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/003a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/003b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 03</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/004.jpg');"></div>
-      <div class="body"><h4>Kare 04</h4><div class="line"></div></div>
-    </div>
+    <!-- 4 -->
+    <button class="card" type="button" aria-label="Kare 04" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/004a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/004b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 04</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/005.jpg');"></div>
-      <div class="body"><h4>Kare 05</h4><div class="line"></div></div>
-    </div>
+    <!-- 5 -->
+    <button class="card" type="button" aria-label="Kare 05" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/005a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/005b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 05</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/006.jpg');"></div>
-      <div class="body"><h4>Kare 06</h4><div class="line"></div></div>
-    </div>
+    <!-- 6 -->
+    <button class="card" type="button" aria-label="Kare 06" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/006a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/006b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 06</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/007.jpg');"></div>
-      <div class="body"><h4>Kare 07</h4><div class="line"></div></div>
-    </div>
+    <!-- 7 -->
+    <button class="card" type="button" aria-label="Kare 07" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/007a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/007b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 07</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/008.jpg');"></div>
-      <div class="body"><h4>Kare 08</h4><div class="line"></div></div>
-    </div>
+    <!-- 8 -->
+    <button class="card" type="button" aria-label="Kare 08" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/008a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/008b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 08</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/009.jpg');"></div>
-      <div class="body"><h4>Kare 09</h4><div class="line"></div></div>
-    </div>
+    <!-- 9 -->
+    <button class="card" type="button" aria-label="Kare 09" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/009a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/009b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 09</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/010.jpg');"></div>
-      <div class="body"><h4>Kare 10</h4><div class="line"></div></div>
-    </div>
+    <!-- 10 -->
+    <button class="card" type="button" aria-label="Kare 10" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/010a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/010b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 10</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/011.jpg');"></div>
-      <div class="body"><h4>Kare 11</h4><div class="line"></div></div>
-    </div>
+    <!-- 11 -->
+    <button class="card" type="button" aria-label="Kare 11" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/011a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/011b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 11</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/012.jpg');"></div>
-      <div class="body"><h4>Kare 12</h4><div class="line"></div></div>
-    </div>
+    <!-- 12 -->
+    <button class="card" type="button" aria-label="Kare 12" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/012a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/012b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 12</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/013.jpg');"></div>
-      <div class="body"><h4>Kare 13</h4><div class="line"></div></div>
-    </div>
+    <!-- 13 -->
+    <button class="card" type="button" aria-label="Kare 13" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/013a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/013b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 13</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/014.jpg');"></div>
-      <div class="body"><h4>Kare 14</h4><div class="line"></div></div>
-    </div>
+    <!-- 14 -->
+    <button class="card" type="button" aria-label="Kare 14" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/014a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/014b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 14</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/015.jpg');"></div>
-      <div class="body"><h4>Kare 15</h4><div class="line"></div></div>
-    </div>
+    <!-- 15 -->
+    <button class="card" type="button" aria-label="Kare 15" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/015a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/015b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 15</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/016.jpg');"></div>
-      <div class="body"><h4>Kare 16</h4><div class="line"></div></div>
-    </div>
+    <!-- 16 -->
+    <button class="card" type="button" aria-label="Kare 16" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/016a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/016b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 16</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/017.jpg');"></div>
-      <div class="body"><h4>Kare 17</h4><div class="line"></div></div>
-    </div>
+    <!-- 17 -->
+    <button class="card" type="button" aria-label="Kare 17" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/017a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/017b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 17</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/018.jpg');"></div>
-      <div class="body"><h4>Kare 18</h4><div class="line"></div></div>
-    </div>
+    <!-- 18 -->
+    <button class="card" type="button" aria-label="Kare 18" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/018a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/018b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 18</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/019.jpg');"></div>
-      <div class="body"><h4>Kare 19</h4><div class="line"></div></div>
-    </div>
+    <!-- 19 -->
+    <button class="card" type="button" aria-label="Kare 19" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/019a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/019b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 19</h4><div class="line"></div></div>
+    </button>
 
-    <div class="card">
-      <div class="thumb" style="background-image:url('galeri/020.jpg');"></div>
-      <div class="body"><h4>Kare 20</h4><div class="line"></div></div>
-    </div>
+    <!-- 20 -->
+    <button class="card" type="button" aria-label="Kare 20" tabindex="0">
+      <div class="flip">
+        <div class="face front" style="background-image:url('galeri/020a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/020b.jpg');"></div>
+      </div>
+      <div class="caption"><h4>Kare 20</h4><div class="line"></div></div>
+    </button>
 
   </div>
 </section>
