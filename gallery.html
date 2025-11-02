@@ -17,7 +17,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 .header .container{display:flex;justify-content:space-between;align-items:center;height:56px}
 .brand{font-family:Oswald;letter-spacing:.08em}
 
-/* geri butonu (sınıf adı değişti) */
+/* geri butonu */
 .back-btn{
   font-weight:700;border:3px solid #f4c6bc;background:var(--accent);color:#331e18;
   padding:8px 14px;border-radius:10px;box-shadow:0 4px 0 var(--accent-2)
@@ -30,24 +30,30 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 /* Flip kartlar */
 .card{
   background:transparent;border:none;padding:0;margin:0;cursor:pointer;outline:none;
-  perspective:1000px;border-radius:8px;
+  perspective:1000px; -webkit-perspective:1000px;
+  border-radius:8px;
 }
 .card:focus-visible{box-shadow:0 0 0 3px #f4c6bcaa;border-radius:10px}
+
 .flip{
   position:relative;width:100%;aspect-ratio:4/3;border-radius:8px;
-  transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.65,.2,1);
+  transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.65,.2,1);
   box-shadow:var(--shadow);border:4px solid var(--frame);overflow:hidden;
+  will-change:transform;
 }
 .card:hover .flip,
 .card:focus .flip,
 .card:active .flip{ transform:rotateY(180deg) }
 
 .face{
-  position:absolute;inset:0;backface-visibility:hidden;
+  position:absolute;inset:0;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  transform:translateZ(0);
   background:#000 center/cover no-repeat;filter:sepia(.35) contrast(1.05)
 }
-/* sadece kartın arka yüzünü çevir */
-.face.back{ transform:rotateY(180deg) }
+.face.front{ transform:rotateY(0) translateZ(0) }
+.face.back { transform:rotateY(180deg) translateZ(0) }
 
 .caption{
   text-align:center;padding:10px 0 14px;background:var(--bg-2);
@@ -56,7 +62,7 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
 .caption h4{margin:0;font-family:Oswald;letter-spacing:.04em;font-size:18px;color:var(--ink)}
 .caption .line{width:60px;height:3px;background:var(--frame);margin:8px auto 0;opacity:.7}
 
-/* Erişilebilirlik: hareketi azalt seçeneği */
+/* Erişilebilirlik: hareketi azalt */
 @media (prefers-reduced-motion:reduce){
   .flip{transition:none}
   .card:hover .flip,.card:focus .flip,.card:active .flip{transform:none}
@@ -83,33 +89,34 @@ a{color:inherit;text-decoration:none} .container{max-width:1100px;margin:auto;pa
   <h2 style="font-family:Oswald;margin:0 0 18px;letter-spacing:.05em">Fotoğraf Galerisi</h2>
   <div class="grid">
 
-    <!-- 1 -->
+    <!-- 1 (YOL DÜZELTİLDİ) -->
     <button class="card" type="button" aria-label="Kare 01" tabindex="0">
       <div class="flip">
-        <div class="face front" style="background-image:url('galeri001a.jpg');"></div>
-        <div class="face back"  style="background-image:url('galeri001b.jpg');"></div>
+        <div class="face front" style="background-image:url('galeri/001a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/001b.jpg');"></div>
       </div>
       <div class="caption"><h4>Benim Adım Orman</h4><div class="line"></div></div>
     </button>
 
-    <!-- 2 -->
+    <!-- 2 (YOL DÜZELTİLDİ) -->
     <button class="card" type="button" aria-label="Kare 02" tabindex="0">
       <div class="flip">
-        <div class="face front" style="background-image:url('galeri002a.jpg');"></div>
-        <div class="face back"  style="background-image:url('galeri002b.jpg');"></div>
+        <div class="face front" style="background-image:url('galeri/002a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/002b.jpg');"></div>
       </div>
       <div class="caption"><h4>Can Kırıkları</h4><div class="line"></div></div>
     </button>
 
-    <!-- 3 -->
+    <!-- 3 (YOL DÜZELTİLDİ) -->
     <button class="card" type="button" aria-label="Kare 03" tabindex="0">
       <div class="flip">
-        <div class="face front" style="background-image:url('galeri003a.jpg');"></div>
-        <div class="face back"  style="background-image:url('galeri003b.jpg');"></div>
+        <div class="face front" style="background-image:url('galeri/003a.jpg');"></div>
+        <div class="face back"  style="background-image:url('galeri/003b.jpg');"></div>
       </div>
       <div class="caption"><h4>Parmak İzi</h4><div class="line"></div></div>
     </button>
 
+    <!-- 4–20 aynen -->
     <!-- 4 -->
     <button class="card" type="button" aria-label="Kare 04" tabindex="0">
       <div class="flip">
